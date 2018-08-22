@@ -57,3 +57,16 @@ func Test_GetFittest(t *testing.T) {
 		t.Errorf("expected %v to be %v", fittest, expect)
 	}
 }
+
+func Test_CalculateFitness(t *testing.T) {
+	p := NewPopulation(5)
+
+	p.CalculatePopulationFitness()
+
+	for i := 0; i < len(p.Individuals); i++ {
+		if p.Individuals[i].Fitness == 0 {
+			t.Error("fitness not calculated")
+			return
+		}
+	}
+}

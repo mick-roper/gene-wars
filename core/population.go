@@ -38,3 +38,10 @@ func (p *Population) GetFittest() *Individual {
 	p.Fittest = maxFitIx
 	return p.Individuals[maxFitIx]
 }
+
+// CalculatePopulationFitness calculate the fitness of the entire population
+func (p *Population) CalculatePopulationFitness() {
+	for i := 0; i < len(p.Individuals); i++ {
+		p.Individuals[i].CalcFitness()
+	}
+}
