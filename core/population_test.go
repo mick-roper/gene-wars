@@ -8,7 +8,7 @@ import (
 func Test_NewPopulation(t *testing.T) {
 	size := 10
 
-	p := NewPopulation(size)
+	p := NewPopulation(size, 5)
 
 	if p == nil {
 		t.Error("population is nil")
@@ -59,7 +59,7 @@ func Test_GetFittest(t *testing.T) {
 }
 
 func Test_CalculateFitness(t *testing.T) {
-	p := NewPopulation(5)
+	p := NewPopulation(5, 5)
 
 	p.CalculatePopulationFitness()
 
