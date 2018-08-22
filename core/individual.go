@@ -1,6 +1,7 @@
 package core
 
-const geneCount = 5
+// GeneCount indicates the number of genes in each individual
+const GeneCount = 5
 
 // Individual that contains genes
 type Individual struct {
@@ -12,6 +13,6 @@ type Individual struct {
 func NewIndividual() *Individual {
 	return &Individual{
 		fitness: 0,
-		genes:   make([]float64, geneCount),
+		genes:   make([]float64, GeneCount),
 	}
 }

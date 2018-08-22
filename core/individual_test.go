@@ -12,7 +12,7 @@ func Test_NewIndividual(t *testing.T) {
 	}{
 		{
 			name:   "all good",
-			expect: &Individual{fitness: 0, genes: make([]float64, geneCount)},
+			expect: &Individual{fitness: 0, genes: make([]float64, GeneCount)},
 		},
 	}
 
