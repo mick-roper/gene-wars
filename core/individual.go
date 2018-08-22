@@ -28,7 +28,13 @@ func NewIndividual(geneLength int) *Individual {
 
 // CalcFitness calculates the fitness of the individual
 func (i *Individual) CalcFitness() {
-	for n := 0; n < len(i.genes); n++ {
+	f := 0
 
+	for n := 0; n < len(i.genes); n++ {
+		if i.genes[n] == 1 {
+			f++
+		}
 	}
+
+	i.Fitness = f
 }

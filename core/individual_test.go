@@ -22,3 +22,21 @@ func Test_NewIndividual(t *testing.T) {
 		t.Error("genes array length is wrong")
 	}
 }
+
+func Test_CalcFitness(t *testing.T) {
+	i := NewIndividual(10)
+
+	expectFitness := 0
+
+	for n := 0; n < len(i.genes); n++ {
+		if i.genes[n] == 1 {
+			expectFitness++
+		}
+	}
+
+	i.CalcFitness()
+
+	if expectFitness != i.Fitness {
+		t.Errorf("expected fitness to be %v but was %v", expectFitness, i.Fitness)
+	}
+}
