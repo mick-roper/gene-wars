@@ -1,11 +1,14 @@
 package core
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func Test_NewPopulation(t *testing.T) {
 	size := 10
 
-	p := NewPopulation(size)
+	p := NewPopulation(size, 5)
 
 	if p == nil {
 		t.Error("population is nil")
@@ -25,6 +28,45 @@ func Test_NewPopulation(t *testing.T) {
 	for i := 0; i < len(p.Individuals); i++ {
 		if p.Individuals[i] == nil {
 			t.Errorf("inidividual at index %v is nil", i)
+		}
+	}
+}
+
+func Test_GetFittest(t *testing.T) {
+	i := []*Individual{
+		&Individual{0, []int{1, 1, 1, 0, 0}},
+		&Individual{0, []int{1, 0, 1, 0, 0}},
+		&Individual{0, []int{1, 1, 1, 1, 0}}, // should be fittest!
+		&Individual{0, []int{1, 0, 0, 0, 0}},
+	}
+
+	for _, x := range i {
+		x.CalcFitness()
+	}
+
+	p := &Population{i, 0}
+
+	expect := i[2]
+	fittest := p.GetFittest()
+
+	if p.Fittest != 2 {
+		t.Error("expected fittest to be 2")
+	}
+
+	if !reflect.DeepEqual(fittest, expect) {
+		t.Errorf("expected %v to be %v", fittest, expect)
+	}
+}
+
+func Test_CalculateFitness(t *testing.T) {
+	p := NewPopulation(5, 5)
+
+	p.CalculatePopulationFitness()
+
+	for i := 0; i < len(p.Individuals); i++ {
+		if p.Individuals[i].Fitness == 0 {
+			t.Error("fitness not calculated")
+			return
 		}
 	}
 }
