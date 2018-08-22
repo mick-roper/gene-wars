@@ -1,7 +1,9 @@
 package main
 
-import "log"
+import "../core"
 
 func main() {
-	log.Print("hi")
+	w := core.NewWorld(4, 5)
+
+	w.Run()
 }
