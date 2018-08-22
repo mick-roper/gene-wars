@@ -43,4 +43,6 @@ func (p *Population) CalculatePopulationFitness() {
 	for i := 0; i < len(p.Individuals); i++ {
 		p.Individuals[i].CalcFitness()
 	}
+
+	p.GetFittest()
 }
