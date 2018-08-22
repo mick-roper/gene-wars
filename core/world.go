@@ -9,6 +9,7 @@ import (
 // World that a population lives in
 type World struct {
 	r          *rand.Rand
+	genes      int
 	Population *Population
 	Generation int
 }
@@ -20,7 +21,7 @@ func NewWorld(popSize, genes int) *World {
 
 	p := NewPopulation(popSize, genes)
 
-	return &World{r, p, 0}
+	return &World{r, genes, p, 0}
 }
 
 // Run the simulation
@@ -33,7 +34,7 @@ func (w *World) Run() {
 	var fittest *Individual // we need this later
 
 	// 2: loop until we converge
-	for w.Population.Fittest < 5 {
+	for w.Population.Fittest < w.genes {
 		w.Generation++
 
 		// 3: selection
