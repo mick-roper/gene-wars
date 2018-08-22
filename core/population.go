@@ -38,6 +38,38 @@ func (p *Population) GetFittest() *Individual {
 	return p.Individuals[maxFitIx]
 }
 
+// GetSecondFittest returns the second fittest individual
+func (p *Population) GetSecondFittest() *Individual {
+	maxFit1 := 0
+	maxFit2 := 0
+
+	for i := 0; i < len(p.Individuals); i++ {
+		if p.Individuals[i].Fitness > p.Individuals[maxFit1].Fitness {
+			maxFit2 = maxFit1
+			maxFit1 = i
+		} else if p.Individuals[i].Fitness > p.Individuals[maxFit2].Fitness {
+			maxFit2 = i
+		}
+	}
+
+	return p.Individuals[maxFit2]
+}
+
+// GetLeastFittestIndex returns the index of the least fittest individual in the population
+func (p *Population) GetLeastFittestIndex() int {
+	minFit := math.MaxInt32
+	minFitIx := 0
+
+	for i := 0; i < len(p.Individuals); i++ {
+		if minFit >= p.Individuals[i].Fitness {
+			minFit = p.Individuals[i].Fitness
+			minFitIx = i
+		}
+	}
+
+	return minFitIx
+}
+
 // CalculatePopulationFitness calculate the fitness of the entire population
 func (p *Population) CalculatePopulationFitness() {
 	for i := 0; i < len(p.Individuals); i++ {
