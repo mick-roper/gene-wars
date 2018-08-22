@@ -1,6 +1,9 @@
 package core
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func Test_NewPopulation(t *testing.T) {
 	size := 10
@@ -26,5 +29,31 @@ func Test_NewPopulation(t *testing.T) {
 		if p.Individuals[i] == nil {
 			t.Errorf("inidividual at index %v is nil", i)
 		}
+	}
+}
+
+func Test_GetFittest(t *testing.T) {
+	i := []*Individual{
+		&Individual{0, []int{1, 1, 1, 0, 0}},
+		&Individual{0, []int{1, 0, 1, 0, 0}},
+		&Individual{0, []int{1, 1, 1, 1, 0}}, // should be fittest!
+		&Individual{0, []int{1, 0, 0, 0, 0}},
+	}
+
+	for _, x := range i {
+		x.CalcFitness()
+	}
+
+	p := &Population{i, 0}
+
+	expect := i[2]
+	fittest := p.GetFittest()
+
+	if p.Fittest != 2 {
+		t.Error("expected fittest to be 2")
+	}
+
+	if !reflect.DeepEqual(fittest, expect) {
+		t.Errorf("expected %v to be %v", fittest, expect)
 	}
 }
