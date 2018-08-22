@@ -12,5 +12,4 @@ func Test_NewWorld(t *testing.T) {
 		t.Error("world is nil")
 		return
 	}
-
 }
