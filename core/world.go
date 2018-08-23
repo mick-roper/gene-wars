@@ -53,7 +53,7 @@ func (w *World) Run() {
 		f2.CalcFitness()
 
 		// replace weakest offspring with fittest
-		if f1.Fitness > f2.Fitness {
+		if f1.Fitness >= f2.Fitness {
 			fittest = f1
 		} else {
 			fittest = f2
@@ -86,7 +86,7 @@ func (w *World) selectFittest() (*Individual, *Individual) {
 }
 
 func (w *World) crossover(i1, i2 *Individual) {
-	crossOverPoint := w.r.Intn(len(i1.genes))
+	crossOverPoint := w.r.Intn(w.genes)
 
 	for i := 0; i < crossOverPoint; i++ {
 		x := i1.genes[i]
@@ -97,7 +97,7 @@ func (w *World) crossover(i1, i2 *Individual) {
 
 func (w *World) mutate(i1, i2 *Individual) {
 	for _, i := range []*Individual{i1, i2} {
-		mutationPoint := w.r.Intn(len(i1.genes))
+		mutationPoint := w.r.Intn(w.genes)
 
 		// flip values
 		if i.genes[mutationPoint] == 1 {
